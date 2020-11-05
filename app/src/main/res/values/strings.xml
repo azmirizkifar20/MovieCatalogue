@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Movie Catalogue</string>
+    <string name="movies">Movies</string>
+    <string name="tv_show">TV Show</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="image_description">image description</string>
+    <string name="movies_description">Adrift in space with no food or water, Tony Stark sends a message to Pepper Potts as his oxygen supply starts to dwindle.</string>
+    <string name="trailer">Trailer</string>
+    <string name="share">Share</string>
+    <string name="detail">Detail</string>
+    <string name="share_movie">I invite you to watch this %1$s! you can see the trailer here : %2$s</string>
+</resources>

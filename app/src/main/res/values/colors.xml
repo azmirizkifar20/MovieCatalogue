@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="color_primary">#353859</color>
+    <color name="color_primary_dark">#272a3c</color>
+    <color name="rating_color">#e1c74c</color>
+    <color name="button_color">#46518F</color>
+    <color name="text_grey">#9F9FA1</color>
+</resources>
