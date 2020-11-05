@@ -14,7 +14,7 @@
         <activity android:name=".view.home.HomeActivity" />
         <activity android:name=".view.detail.DetailActivity" />
         <activity
-            android:name=".view.home.MainActivity"
+            android:name=".view.splashscreen.MainActivity"
             android:theme="@style/Theme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

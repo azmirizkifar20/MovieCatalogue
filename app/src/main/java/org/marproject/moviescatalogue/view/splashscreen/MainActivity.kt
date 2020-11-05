@@ -1,9 +1,10 @@
-package org.marproject.moviescatalogue.view.home
+package org.marproject.moviescatalogue.view.splashscreen
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.marproject.moviescatalogue.R
+import org.marproject.moviescatalogue.view.home.HomeActivity
 
 class MainActivity : AppCompatActivity() {
 
