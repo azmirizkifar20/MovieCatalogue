@@ -2,7 +2,6 @@ package org.marproject.moviescatalogue.view.home
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -33,8 +32,7 @@ class HomeActivityTest {
     fun loadDetailMovie() {
         onView(withId(R.id.rv_movies)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                0,
-                ViewActions.click()
+                0, click()
             )
         )
         onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
@@ -63,8 +61,7 @@ class HomeActivityTest {
         onView(withText("TV SHOW")).perform(click())
         onView(withId(R.id.rv_tv_show)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                0,
-                ViewActions.click()
+                0, click()
             )
         )
         onView(withId(R.id.tv_title)).check(matches(isDisplayed()))

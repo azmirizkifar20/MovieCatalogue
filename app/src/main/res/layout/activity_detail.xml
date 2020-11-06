@@ -26,8 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="270dp"
             android:contentDescription="@string/image_description"
-            android:scaleType="centerCrop"
-            android:src="@drawable/hitman" />
+            android:scaleType="centerCrop" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_bookmark"
