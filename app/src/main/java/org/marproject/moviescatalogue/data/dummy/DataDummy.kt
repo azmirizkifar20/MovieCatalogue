@@ -125,7 +125,7 @@ object DataDummy {
             "Sci-fi",
             7.5,
             "Premise. The first season follows S.H.I.E.L.D. agent Phil Coulson as he puts together a small team of agents to handle strange new cases. ... During the third season, Coulson begins a secret mission to assemble the Secret Warriors, a team of Inhumans, as Hydra restores its ancient Inhuman leader Hive to power.",
-            "https://cdn.thenationroar.com/wp-content/uploads/2020/07/agents-of-COVER.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/81JX%2BiFGujL._SL1500_.jpg",
             "https://youtu.be/A4du3_6QGm8"
         ),
         MovieEntity(
