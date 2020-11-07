@@ -16,7 +16,7 @@ class MovieViewModelTest {
 
     @Test
     fun getMoviewData() {
-        val movieEntities = viewModel.getMoviewData()
+        val movieEntities = viewModel.getMoviesData()
         assertNotNull(movieEntities)
         assertEquals(10, movieEntities.size)
     }

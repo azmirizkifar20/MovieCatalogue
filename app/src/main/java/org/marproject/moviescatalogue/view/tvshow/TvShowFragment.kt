@@ -12,10 +12,11 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_movie.view.*
 import org.marproject.moviescatalogue.R
 import org.marproject.moviescatalogue.databinding.FragmentTvShowBinding
-import org.marproject.moviescatalogue.model.Movies
+import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 import org.marproject.moviescatalogue.utils.`interface`.AdapterCallback
 import org.marproject.moviescatalogue.utils.adapter.AdapterUtils
 import org.marproject.moviescatalogue.view.detail.DetailActivity
+import org.marproject.moviescatalogue.viewmodel.ViewModelFactory
 
 class TvShowFragment : Fragment() {
 
@@ -27,15 +28,17 @@ class TvShowFragment : Fragment() {
     private lateinit var viewModel: TvShowViewModel
 
     // utils
-    private lateinit var listMovies: List<Movies>
-    private lateinit var adapter: AdapterUtils<Movies>
+    private lateinit var listMovies: List<MovieEntity>
+    private lateinit var adapter: AdapterUtils<MovieEntity>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTvShowBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[TvShowViewModel::class.java]
+
+        val factory = ViewModelFactory.getInstance(requireActivity())
+        viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
         adapter = AdapterUtils(requireContext())
         listMovies = viewModel.getTvShowData()
         setupAdapter(binding.rvTvShow)
@@ -51,8 +54,8 @@ class TvShowFragment : Fragment() {
             .build(recyclerView)
     }
 
-    private val adapterCallback = object : AdapterCallback<Movies> {
-        override fun initComponent(itemView: View, data: Movies, itemIndex: Int) {
+    private val adapterCallback = object : AdapterCallback<MovieEntity> {
+        override fun initComponent(itemView: View, data: MovieEntity, itemIndex: Int) {
             itemView.tv_year.text = data.year
             itemView.tv_title.text = data.title
             itemView.tv_description.text = data.description
@@ -63,7 +66,7 @@ class TvShowFragment : Fragment() {
                 .into(itemView.image_poster)
         }
 
-        override fun onItemClicked(itemView: View, data: Movies, itemIndex: Int) {
+        override fun onItemClicked(itemView: View, data: MovieEntity, itemIndex: Int) {
             startActivity(Intent(requireContext(), DetailActivity::class.java).apply {
                 putExtra(DetailActivity.EXTRA_TV_SHOW, data.id)
             })

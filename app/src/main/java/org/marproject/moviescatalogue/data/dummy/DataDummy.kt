@@ -1,10 +1,10 @@
-package org.marproject.moviescatalogue.data
+package org.marproject.moviescatalogue.data.dummy
 
-import org.marproject.moviescatalogue.model.Movies
+import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 
 object DataDummy {
-    fun moviesData(): List<Movies> = listOf(
-        Movies(
+    fun moviesData(): List<MovieEntity> = listOf(
+        MovieEntity(
             "MOV1",
             "movie",
             "Avengers: Endgame",
@@ -15,7 +15,7 @@ object DataDummy {
             "https://images-na.ssl-images-amazon.com/images/I/71niXI3lxlL._AC_SY741_.jpg",
             "https://youtu.be/TcMBFSGVi1c"
         ),
-        Movies(
+        MovieEntity(
             "MOV2",
             "movie",
             "Avengers: Infinity War",
@@ -26,7 +26,7 @@ object DataDummy {
             "https://images-na.ssl-images-amazon.com/images/I/71t--RaUiNL._AC_SY879_.jpg",
             "https://youtu.be/QwievZ1Tx-8"
         ),
-        Movies(
+        MovieEntity(
             "MOV3",
             "movie",
             "Avengers: Age of Ultron",
@@ -37,7 +37,7 @@ object DataDummy {
             "https://images-na.ssl-images-amazon.com/images/I/71wV2rzkFwL._AC_SL1022_.jpg",
             "https://youtu.be/tmeOjFno6Do"
         ),
-        Movies(
+        MovieEntity(
             "MOV4",
             "movie",
             "The Avengers",
@@ -48,7 +48,7 @@ object DataDummy {
             "https://images-na.ssl-images-amazon.com/images/I/719SFBdxRtL._AC_SL1000_.jpg",
             "https://youtu.be/eOrNdBpGMv8"
         ),
-        Movies(
+        MovieEntity(
             "MOV5",
             "movie",
             "Spider-Man: Far From Home",
@@ -59,7 +59,7 @@ object DataDummy {
             "https://i.pinimg.com/originals/58/3f/e4/583fe4b6d96d9cb8bbf0ae2b2749289d.png",
             "https://youtu.be/Nt9L1jCKGnE"
         ),
-        Movies(
+        MovieEntity(
             "MOV6",
             "movie",
             "Spider-Man: Homecoming",
@@ -70,7 +70,7 @@ object DataDummy {
             "https://images-na.ssl-images-amazon.com/images/I/A1CcbJfKqJL._AC_SY679_.jpg",
             "https://youtu.be/xrzXIaTt99U"
         ),
-        Movies(
+        MovieEntity(
             "MOV7",
             "movie",
             "Thor: Ragnarok",
@@ -81,7 +81,7 @@ object DataDummy {
             "https://images-na.ssl-images-amazon.com/images/I/A1HBBNzBdxL._AC_SL1500_.jpg",
             "https://youtu.be/ODqPGttjjOY"
         ),
-        Movies(
+        MovieEntity(
             "MOV8",
             "movie",
             "Thor: The Dark World",
@@ -92,7 +92,7 @@ object DataDummy {
             "https://images-na.ssl-images-amazon.com/images/I/51JHjkMiujL._AC_.jpg",
             "https://youtu.be/npvJ9FTgZbM"
         ),
-        Movies(
+        MovieEntity(
             "MOV9",
             "movie",
             "Thor",
@@ -103,7 +103,7 @@ object DataDummy {
             "https://static.rogerebert.com/uploads/movie/movie_poster/thor-2011/large_jqcMUV73jEhO0gv5yi28FD8JbHQ.jpg",
             "https://youtu.be/JOddp-nlNvQ"
         ),
-        Movies(
+        MovieEntity(
             "MOV10",
             "movie",
             "Black Panther",
@@ -116,8 +116,8 @@ object DataDummy {
         )
     )
 
-    fun tvShowData(): List<Movies> = listOf(
-        Movies(
+    fun tvShowData(): List<MovieEntity> = listOf(
+        MovieEntity(
             "TVS1",
             "tv-show",
             "Agents of S.H.I.E.L.D.",
@@ -128,7 +128,7 @@ object DataDummy {
             "https://cdn.thenationroar.com/wp-content/uploads/2020/07/agents-of-COVER.jpg",
             "https://youtu.be/A4du3_6QGm8"
         ),
-        Movies(
+        MovieEntity(
             "TVS2",
             "tv-show",
             "Inhumans",
@@ -139,7 +139,7 @@ object DataDummy {
             "https://i.pinimg.com/originals/f7/5c/3d/f75c3d84d356e9f37a1b2bebb5943fde.jpg",
             "https://youtu.be/1sYF1SXcWqQ"
         ),
-        Movies(
+        MovieEntity(
             "TVS3",
             "tv-show",
             "The Defenders",
@@ -150,7 +150,7 @@ object DataDummy {
             "https://i.pinimg.com/originals/f7/74/40/f77440c1aa0d1c112bf38d425955de08.jpg",
             "https://youtu.be/KtsUFqZpCIw"
         ),
-        Movies(
+        MovieEntity(
             "TVS4",
             "tv-show",
             "The Punisher",
@@ -161,7 +161,7 @@ object DataDummy {
             "https://images-na.ssl-images-amazon.com/images/I/719CPjM5twL._AC_SL1200_.jpg",
             "https://youtu.be/C9A-tG_tPP4"
         ),
-        Movies(
+        MovieEntity(
             "TVS5",
             "tv-show",
             "Iron Fist",
@@ -172,7 +172,7 @@ object DataDummy {
             "https://i.pinimg.com/originals/9d/da/c7/9ddac714f57339f2f23c4aaf14204046.png",
             "https://youtu.be/f9OKL5no-S0"
         ),
-        Movies(
+        MovieEntity(
             "TVS6",
             "tv-show",
             "Cloak & Dagger",
@@ -183,7 +183,7 @@ object DataDummy {
             "https://i.pinimg.com/736x/89/29/0c/89290c2dd566636ed13e04b8db5c0e0f.jpg",
             "https://youtu.be/5RJnZ1u1WFc"
         ),
-        Movies(
+        MovieEntity(
             "TVS7",
             "tv-show",
             "Jessica Jones",
@@ -194,7 +194,7 @@ object DataDummy {
             "https://d1w8cc2yygc27j.cloudfront.net/-4157264040428098463/1193870767771905496.jpg",
             "https://youtu.be/nWHUjuJ8zxE"
         ),
-        Movies(
+        MovieEntity(
             "TVS8",
             "tv-show",
             "Luke Cage",
@@ -205,7 +205,7 @@ object DataDummy {
             "https://images-na.ssl-images-amazon.com/images/I/71xby-zAr7L._AC_SL1024_.jpg",
             "https://youtu.be/ORa4hPhGrpo"
         ),
-        Movies(
+        MovieEntity(
             "TVS9",
             "tv-show",
             "Daredevil",
@@ -216,7 +216,7 @@ object DataDummy {
             "https://i.pinimg.com/originals/59/9e/bb/599ebbf39dd6e27626fa11548bf3cc68.jpg",
             "https://youtu.be/jAy6NJ_D5vU"
         ),
-        Movies(
+        MovieEntity(
             "TVS10",
             "tv-show",
             "Runaways",

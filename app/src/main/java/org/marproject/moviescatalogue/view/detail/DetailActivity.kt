@@ -10,7 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import org.marproject.moviescatalogue.R
 import org.marproject.moviescatalogue.databinding.ActivityDetailBinding
-import org.marproject.moviescatalogue.model.Movies
+import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
+import org.marproject.moviescatalogue.viewmodel.ViewModelFactory
 
 class DetailActivity : AppCompatActivity() {
 
@@ -26,7 +27,9 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailViewModel::class.java]
+
+        val factory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
         supportActionBar?.hide()
 
         val extra = intent.extras
@@ -36,22 +39,18 @@ class DetailActivity : AppCompatActivity() {
 
             if (movieId != null) {
                 viewModel.setSelectedMovie(movieId)
-                viewModel.getMovieDetail()?.let { movie ->
-                    populateView(movie)
-                }
+                populateView(viewModel.getMovieDetail())
             }
             if (tvShowId != null) {
                 viewModel.setSelectedTvShow(tvShowId)
-                viewModel.getTvShowDetail()?.let { movie ->
-                    populateView(movie)
-                }
+                populateView(viewModel.getTvShowDetail())
             }
         }
 
         setContentView(binding.root)
     }
 
-    private fun populateView(movie: Movies) {
+    private fun populateView(movie: MovieEntity) {
         binding.tvTitle.text = movie.title
         binding.tvDescription.text = movie.description
         binding.tvYear.text = StringBuilder().append("Year : ").append(movie.year)

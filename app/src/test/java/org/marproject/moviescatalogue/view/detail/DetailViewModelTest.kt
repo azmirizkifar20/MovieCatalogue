@@ -4,7 +4,7 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.Before
-import org.marproject.moviescatalogue.data.DataDummy
+import org.marproject.moviescatalogue.data.dummy.DataDummy
 
 class DetailViewModelTest {
     private lateinit var viewModel: DetailViewModel

@@ -1,10 +1,10 @@
-package org.marproject.moviescatalogue.model
+package org.marproject.moviescatalogue.data.source.remote.response
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Movies (
+data class MovieResponse(
     val id: String,
     val type: String,
     val title: String,
@@ -14,4 +14,4 @@ data class Movies (
     val description: String,
     val poster: String,
     val trailer: String
-) : Parcelable
+)  :  Parcelable
