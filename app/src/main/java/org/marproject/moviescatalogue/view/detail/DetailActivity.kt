@@ -39,11 +39,15 @@ class DetailActivity : AppCompatActivity() {
 
             if (movieId != null) {
                 viewModel.setSelectedMovie(movieId)
-                populateView(viewModel.getMovieDetail())
+                viewModel.getMovieDetail().observe(this, {
+                    populateView(it)
+                })
             }
             if (tvShowId != null) {
                 viewModel.setSelectedTvShow(tvShowId)
-                populateView(viewModel.getTvShowDetail())
+                viewModel.getTvShowDetail().observe(this, {
+                    populateView(it)
+                })
             }
         }
 

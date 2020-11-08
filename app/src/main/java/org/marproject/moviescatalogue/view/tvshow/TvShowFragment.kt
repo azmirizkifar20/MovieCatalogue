@@ -37,11 +37,16 @@ class TvShowFragment : Fragment() {
     ): View? {
         _binding = FragmentTvShowBinding.inflate(inflater, container, false)
 
+        // init adapter
+        adapter = AdapterUtils(requireContext())
+
+        // setup view model
         val factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
-        adapter = AdapterUtils(requireContext())
-        listMovies = viewModel.getTvShowData()
-        setupAdapter(binding.rvTvShow)
+        viewModel.getTvShowData().observe(this, {
+            listMovies = it
+            setupAdapter(binding.rvTvShow)
+        })
 
         return binding.root
     }

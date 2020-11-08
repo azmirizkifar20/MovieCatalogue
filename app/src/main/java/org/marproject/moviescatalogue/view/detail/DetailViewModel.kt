@@ -1,7 +1,7 @@
 package org.marproject.moviescatalogue.view.detail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import org.marproject.moviescatalogue.data.dummy.DataDummy
 import org.marproject.moviescatalogue.data.source.MoviesRepository
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 
@@ -18,7 +18,7 @@ class DetailViewModel(private val moviesRepository: MoviesRepository) : ViewMode
         this.tvShowId = id
     }
 
-    fun getMovieDetail(): MovieEntity = moviesRepository.getDetailMovie(movieId)
+    fun getMovieDetail(): LiveData<MovieEntity> = moviesRepository.getDetailMovie(movieId)
 
-    fun getTvShowDetail(): MovieEntity = moviesRepository.getDetailTvShow(tvShowId)
+    fun getTvShowDetail(): LiveData<MovieEntity> = moviesRepository.getDetailTvShow(tvShowId)
 }

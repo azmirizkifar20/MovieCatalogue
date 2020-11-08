@@ -4,26 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 import org.marproject.moviescatalogue.data.source.remote.RemoteDataSource
-import org.marproject.moviescatalogue.data.source.remote.RemoteDataSource.LoadMovieCallback
-import org.marproject.moviescatalogue.data.source.remote.RemoteDataSource.LoadTvShowCallback
 import org.marproject.moviescatalogue.data.source.remote.response.MovieResponse
 
-class MoviesRepository private constructor(
+class FakeMovieRepository(
     private val remoteDataSource: RemoteDataSource
 ) : MoviesDataSource {
 
-    companion object {
-        @Volatile
-        private var instance: MoviesRepository? = null
-        fun getInstance(remoteData: RemoteDataSource): MoviesRepository =
-            instance ?: synchronized(this) {
-                instance ?: MoviesRepository(remoteData)
-            }
-    }
-
     override fun getAllMovies(): LiveData<List<MovieEntity>> {
         val movieResults = MutableLiveData<List<MovieEntity>>()
-        remoteDataSource.getAllMovies(object : LoadMovieCallback {
+        remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMovieCallback {
             override fun onAllMovieReceived(movieResponse: List<MovieResponse>) {
                 val movieList = ArrayList<MovieEntity>()
 
@@ -51,7 +40,7 @@ class MoviesRepository private constructor(
     override fun getDetailMovie(id: String): LiveData<MovieEntity> {
         val movieData = MutableLiveData<MovieEntity>()
 
-        remoteDataSource.getAllMovies(object : LoadMovieCallback {
+        remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMovieCallback {
             override fun onAllMovieReceived(movieResponse: List<MovieResponse>) {
                 lateinit var movie: MovieEntity
 
@@ -79,7 +68,7 @@ class MoviesRepository private constructor(
 
     override fun getAllTvShows(): LiveData<List<MovieEntity>> {
         val tvShowResults = MutableLiveData<List<MovieEntity>>()
-        remoteDataSource.getAllTvShows(object : LoadTvShowCallback {
+        remoteDataSource.getAllTvShows(object : RemoteDataSource.LoadTvShowCallback {
             override fun onAllTvShowReceived(tvShowResponse: List<MovieResponse>) {
                 val tvShowList = ArrayList<MovieEntity>()
 
@@ -107,7 +96,7 @@ class MoviesRepository private constructor(
     override fun getDetailTvShow(id: String): LiveData<MovieEntity> {
         val tvShowData = MutableLiveData<MovieEntity>()
 
-        remoteDataSource.getAllTvShows(object : LoadTvShowCallback {
+        remoteDataSource.getAllTvShows(object : RemoteDataSource.LoadTvShowCallback {
             override fun onAllTvShowReceived(tvShowResponse: List<MovieResponse>) {
                 lateinit var tvShow: MovieEntity
 

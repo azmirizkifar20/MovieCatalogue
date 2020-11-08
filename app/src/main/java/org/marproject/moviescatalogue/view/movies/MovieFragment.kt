@@ -37,11 +37,16 @@ class MovieFragment : Fragment() {
     ): View? {
         _binding = FragmentMovieBinding.inflate(inflater, container, false)
 
+        // init adapter
+        adapter = AdapterUtils(requireContext())
+
+        // setup view model
         val factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
-        adapter = AdapterUtils(requireContext())
-        listMovies = viewModel.getMoviesData()
-        setupAdapter(binding.rvMovies)
+        viewModel.getMoviesData().observe(this, {
+            listMovies = it
+            setupAdapter(binding.rvMovies)
+        })
 
         return binding.root
     }
