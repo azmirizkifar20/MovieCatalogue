@@ -2,21 +2,20 @@ package org.marproject.moviescatalogue.view.movies
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_movie.view.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import org.marproject.moviescatalogue.R
-import org.marproject.moviescatalogue.databinding.FragmentMovieBinding
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
+import org.marproject.moviescatalogue.databinding.FragmentMovieBinding
 import org.marproject.moviescatalogue.utils.`interface`.AdapterCallback
 import org.marproject.moviescatalogue.utils.adapter.AdapterUtils
 import org.marproject.moviescatalogue.view.detail.DetailActivity
-import org.marproject.moviescatalogue.viewmodel.ViewModelFactory
 
 class MovieFragment : Fragment() {
 
@@ -25,7 +24,7 @@ class MovieFragment : Fragment() {
     private val binding get() = _binding!!
 
     // view model
-    private lateinit var viewModel: MovieViewModel
+    private val viewModel: MovieViewModel by viewModel()
 
     // utils
     private lateinit var listMovies: List<MovieEntity>
@@ -40,12 +39,10 @@ class MovieFragment : Fragment() {
         // init adapter
         adapter = AdapterUtils(requireContext())
 
-        // setup view model
-        val factory = ViewModelFactory.getInstance(requireActivity())
-        viewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
         viewModel.getMoviesData().observe(this, {
             listMovies = it
             setupAdapter(binding.rvMovies)
+            binding.loading.visibility = View.GONE
         })
 
         return binding.root

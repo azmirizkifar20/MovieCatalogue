@@ -6,12 +6,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import org.koin.android.viewmodel.ext.android.viewModel
 import org.marproject.moviescatalogue.R
-import org.marproject.moviescatalogue.databinding.ActivityDetailBinding
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
-import org.marproject.moviescatalogue.viewmodel.ViewModelFactory
+import org.marproject.moviescatalogue.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
 
@@ -19,7 +18,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
 
     // view model
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModel()
 
     // utils
     private var bookmark = false
@@ -27,9 +26,6 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
-
-        val factory = ViewModelFactory.getInstance(this)
-        viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
         supportActionBar?.hide()
 
         val extra = intent.extras

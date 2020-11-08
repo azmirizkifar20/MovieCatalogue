@@ -8,18 +8,9 @@ import org.marproject.moviescatalogue.data.source.remote.RemoteDataSource.LoadMo
 import org.marproject.moviescatalogue.data.source.remote.RemoteDataSource.LoadTvShowCallback
 import org.marproject.moviescatalogue.data.source.remote.response.MovieResponse
 
-class MoviesRepository private constructor(
+class MoviesRepository(
     private val remoteDataSource: RemoteDataSource
 ) : MoviesDataSource {
-
-    companion object {
-        @Volatile
-        private var instance: MoviesRepository? = null
-        fun getInstance(remoteData: RemoteDataSource): MoviesRepository =
-            instance ?: synchronized(this) {
-                instance ?: MoviesRepository(remoteData)
-            }
-    }
 
     override fun getAllMovies(): LiveData<List<MovieEntity>> {
         val movieResults = MutableLiveData<List<MovieEntity>>()

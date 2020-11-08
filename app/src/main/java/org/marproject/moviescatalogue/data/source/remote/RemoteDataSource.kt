@@ -5,20 +5,12 @@ import org.marproject.moviescatalogue.data.source.remote.response.MovieResponse
 import org.marproject.moviescatalogue.utils.helper.EspressoIdlingResource
 import org.marproject.moviescatalogue.utils.helper.JsonHelper
 
-class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
+class RemoteDataSource(private val jsonHelper: JsonHelper) {
 
     private val handler = Handler()
 
     companion object  {
         private const val SERVICE_LATENCY_IN_MILLIS: Long = 2000
-
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(helper: JsonHelper): RemoteDataSource =
-            instance ?: synchronized(this)  {
-                instance ?: RemoteDataSource(helper)
-            }
     }
 
     fun getAllMovies(callback: LoadMovieCallback) {

@@ -6,17 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_movie.view.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import org.marproject.moviescatalogue.R
-import org.marproject.moviescatalogue.databinding.FragmentTvShowBinding
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
+import org.marproject.moviescatalogue.databinding.FragmentTvShowBinding
 import org.marproject.moviescatalogue.utils.`interface`.AdapterCallback
 import org.marproject.moviescatalogue.utils.adapter.AdapterUtils
 import org.marproject.moviescatalogue.view.detail.DetailActivity
-import org.marproject.moviescatalogue.viewmodel.ViewModelFactory
 
 class TvShowFragment : Fragment() {
 
@@ -25,7 +24,7 @@ class TvShowFragment : Fragment() {
     private val binding get() = _binding!!
 
     // view model
-    private lateinit var viewModel: TvShowViewModel
+    private val viewModel: TvShowViewModel by viewModel()
 
     // utils
     private lateinit var listMovies: List<MovieEntity>
@@ -40,12 +39,10 @@ class TvShowFragment : Fragment() {
         // init adapter
         adapter = AdapterUtils(requireContext())
 
-        // setup view model
-        val factory = ViewModelFactory.getInstance(requireActivity())
-        viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
         viewModel.getTvShowData().observe(this, {
             listMovies = it
             setupAdapter(binding.rvTvShow)
+            binding.loading.visibility = View.GONE
         })
 
         return binding.root
