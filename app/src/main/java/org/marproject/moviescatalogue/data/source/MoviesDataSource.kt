@@ -2,10 +2,12 @@ package org.marproject.moviescatalogue.data.source
 
 import androidx.lifecycle.LiveData
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
+import org.marproject.moviescatalogue.utils.vo.Resource
 
 interface MoviesDataSource {
-    fun getAllMovies(): LiveData<List<MovieEntity>>
-    fun getDetailMovie(id: String): LiveData<MovieEntity>
-    fun getAllTvShows(): LiveData<List<MovieEntity>>
-    fun getDetailTvShow(id: String): LiveData<MovieEntity>
+    fun getAllMovies(): LiveData<Resource<List<MovieEntity>>>
+    fun getDetailMovie(id: String): LiveData<Resource<MovieEntity>>
+    fun getAllTvShows(): LiveData<Resource<List<MovieEntity>>>
+    fun getDetailTvShow(id: String): LiveData<Resource<MovieEntity>>
+    fun setFavoriteMovie(movie: MovieEntity, state: Boolean)
 }

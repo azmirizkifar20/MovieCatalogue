@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import org.marproject.moviescatalogue.data.source.MoviesRepository
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
+import org.marproject.moviescatalogue.utils.vo.Resource
 
 class DetailViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
@@ -18,7 +19,9 @@ class DetailViewModel(private val moviesRepository: MoviesRepository) : ViewMode
         this.tvShowId = id
     }
 
-    fun getMovieDetail(): LiveData<MovieEntity> = moviesRepository.getDetailMovie(movieId)
+    fun getMovieDetail(): LiveData<Resource<MovieEntity>> = moviesRepository.getDetailMovie(movieId)
 
-    fun getTvShowDetail(): LiveData<MovieEntity> = moviesRepository.getDetailTvShow(tvShowId)
+    fun getTvShowDetail(): LiveData<Resource<MovieEntity>> = moviesRepository.getDetailTvShow(tvShowId)
+
+    fun setBookmark(movie: MovieEntity, status: Boolean) = moviesRepository.setFavoriteMovie(movie, status)
 }

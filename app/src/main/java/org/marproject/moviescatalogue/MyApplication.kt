@@ -5,6 +5,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import org.marproject.moviescatalogue.di.databaseModule
 import org.marproject.moviescatalogue.di.helperModule
 import org.marproject.moviescatalogue.di.repositoryModule
 import org.marproject.moviescatalogue.di.viewModelModule
@@ -19,6 +20,7 @@ class MyApplication : Application() {
                 listOf(
                     helperModule,
                     repositoryModule,
+                    databaseModule,
                     viewModelModule
                 )
             )

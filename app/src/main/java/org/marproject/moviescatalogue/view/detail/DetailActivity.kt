@@ -3,14 +3,17 @@ package org.marproject.moviescatalogue.view.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.marproject.moviescatalogue.R
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 import org.marproject.moviescatalogue.databinding.ActivityDetailBinding
+import org.marproject.moviescatalogue.utils.vo.Status
 
 class DetailActivity : AppCompatActivity() {
 
@@ -19,9 +22,6 @@ class DetailActivity : AppCompatActivity() {
 
     // view model
     private val viewModel: DetailViewModel by viewModel()
-
-    // utils
-    private var bookmark = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +36,33 @@ class DetailActivity : AppCompatActivity() {
             if (movieId != null) {
                 viewModel.setSelectedMovie(movieId)
                 viewModel.getMovieDetail().observe(this, {
-                    populateView(it)
+                    when (it.status) {
+                        Status.LOADING -> binding.loading.visibility = View.VISIBLE
+                        Status.SUCCESS -> if (it.data != null) {
+                            binding.loading.visibility = View.GONE
+                            populateView(it.data)
+                        }
+                        Status.ERROR -> {
+                            binding.loading.visibility = View.GONE
+                            Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 })
             }
             if (tvShowId != null) {
                 viewModel.setSelectedTvShow(tvShowId)
                 viewModel.getTvShowDetail().observe(this, {
-                    populateView(it)
+                    when (it.status) {
+                        Status.LOADING -> binding.loading.visibility = View.VISIBLE
+                        Status.SUCCESS -> if (it.data != null) {
+                            binding.loading.visibility = View.GONE
+                            populateView(it.data)
+                        }
+                        Status.ERROR -> {
+                            binding.loading.visibility = View.GONE
+                            Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 })
             }
         }
@@ -75,21 +95,25 @@ class DetailActivity : AppCompatActivity() {
                 .startChooser()
         }
 
+        // status favorite
+        var status = movie.is_favorite
+        setStatusFavorite(status)
+
         // set bookmark
         binding.fabBookmark.setOnClickListener {
-            bookmark = !bookmark
-            if (!bookmark) {
-                binding.fabBookmark.setImageDrawable(
-                    ResourcesCompat.getDrawable(resources, R.drawable.ic_bookmark, this.theme)
-                )
-            } else {
-                binding.fabBookmark.setImageDrawable(
-                    ResourcesCompat.getDrawable(resources, R.drawable.ic_bookmarked, this.theme)
-                )
-            }
+            status = !status
+            setStatusFavorite(status)
+            viewModel.setBookmark(movie, status)
         }
 
         binding.btnBack.setOnClickListener { finish() }
+    }
+
+    private fun setStatusFavorite(status: Boolean) {
+        if (status)
+            binding.fabBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmarked))
+        else
+            binding.fabBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark))
     }
 
     companion object {
