@@ -1,4 +1,4 @@
-package org.marproject.moviescatalogue.view.movies
+package org.marproject.moviescatalogue.view.home.movies
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +12,7 @@ import org.junit.runner.RunWith
 import org.marproject.moviescatalogue.utils.helper.DataDummy
 import org.marproject.moviescatalogue.data.source.MoviesRepository
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
+import org.marproject.moviescatalogue.view.home.movies.MovieViewModel
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify

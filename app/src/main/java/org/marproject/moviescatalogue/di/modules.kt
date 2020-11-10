@@ -11,8 +11,10 @@ import org.marproject.moviescatalogue.data.source.remote.RemoteDataSource
 import org.marproject.moviescatalogue.utils.helper.AppExecutors
 import org.marproject.moviescatalogue.utils.helper.JsonHelper
 import org.marproject.moviescatalogue.view.detail.DetailViewModel
-import org.marproject.moviescatalogue.view.movies.MovieViewModel
-import org.marproject.moviescatalogue.view.tvshow.TvShowViewModel
+import org.marproject.moviescatalogue.view.favorite.movies.FavoriteMovieViewModel
+import org.marproject.moviescatalogue.view.favorite.tvshow.FavoriteTvShowViewModel
+import org.marproject.moviescatalogue.view.home.movies.MovieViewModel
+import org.marproject.moviescatalogue.view.home.tvshow.TvShowViewModel
 
 val helperModule = module {
     factory { JsonHelper(get()) }
@@ -48,4 +50,6 @@ val viewModelModule = module {
     viewModel { MovieViewModel(get()) }
     viewModel { TvShowViewModel(get()) }
     viewModel { DetailViewModel(get()) }
+    viewModel { FavoriteMovieViewModel(get()) }
+    viewModel { FavoriteTvShowViewModel(get()) }
 }

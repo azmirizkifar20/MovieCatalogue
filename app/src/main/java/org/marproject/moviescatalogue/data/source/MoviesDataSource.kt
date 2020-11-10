@@ -9,5 +9,7 @@ interface MoviesDataSource {
     fun getDetailMovie(id: String): LiveData<Resource<MovieEntity>>
     fun getAllTvShows(): LiveData<Resource<List<MovieEntity>>>
     fun getDetailTvShow(id: String): LiveData<Resource<MovieEntity>>
+    fun getFavoriteMovies(): LiveData<List<MovieEntity>>
+    fun getFavoriteTvShows(): LiveData<List<MovieEntity>>
     fun setFavoriteMovie(movie: MovieEntity, state: Boolean)
 }

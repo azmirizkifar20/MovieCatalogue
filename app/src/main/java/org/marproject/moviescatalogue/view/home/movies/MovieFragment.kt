@@ -1,4 +1,4 @@
-package org.marproject.moviescatalogue.view.tvshow
+package org.marproject.moviescatalogue.view.home.movies
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,24 +8,24 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.viewmodel.ext.android.viewModel
-import org.marproject.moviescatalogue.databinding.FragmentTvShowBinding
-import org.marproject.moviescatalogue.utils.adapter.TvShowAdapter
+import org.marproject.moviescatalogue.databinding.FragmentMovieBinding
+import org.marproject.moviescatalogue.utils.adapter.MovieAdapter
 import org.marproject.moviescatalogue.utils.vo.Status
 
-class TvShowFragment : Fragment() {
+class MovieFragment : Fragment() {
 
     // binding
-    private var _binding: FragmentTvShowBinding? = null
+    private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
 
     // view model
-    private val viewModel: TvShowViewModel by viewModel()
+    private val viewModel: MovieViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentTvShowBinding.inflate(inflater, container, false)
+        _binding = FragmentMovieBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -34,15 +34,15 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // adapter
-        val tvShowAdapter = TvShowAdapter()
+        val movieAdapter = MovieAdapter()
 
-        viewModel.getTvShowData().observe(this, {
+        viewModel.getMoviesData().observe(this, {
             if (it != null) {
                 when (it.status) {
-                    Status.LOADING -> binding.loading.visibility = View.GONE
+                    Status.LOADING -> binding.loading.visibility = View.VISIBLE
                     Status.SUCCESS -> {
-                        tvShowAdapter.setTvShows(it.data)
-                        tvShowAdapter.notifyDataSetChanged()
+                        movieAdapter.setMovies(it.data)
+                        movieAdapter.notifyDataSetChanged()
                         binding.loading.visibility = View.GONE
                     }
                     Status.ERROR -> {
@@ -53,10 +53,10 @@ class TvShowFragment : Fragment() {
             }
         })
 
-        with(binding.rvTvShow) {
+        with(binding.rvMovies) {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            adapter = tvShowAdapter
+            adapter = movieAdapter
         }
     }
 

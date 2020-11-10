@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import org.marproject.moviescatalogue.R
-import org.marproject.moviescatalogue.view.movies.MovieFragment
-import org.marproject.moviescatalogue.view.tvshow.TvShowFragment
+import org.marproject.moviescatalogue.view.favorite.movies.FavoriteMovieFragment
+import org.marproject.moviescatalogue.view.favorite.tvshow.FavoriteTvShowFragment
 
-class SectionAdapter(
+class SectionFavoriteAdapter(
     private val mContext: Context,
     fm: FragmentManager
 ) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -21,8 +21,8 @@ class SectionAdapter(
 
     override fun getItem(position: Int): Fragment =
         when (position) {
-            0 -> MovieFragment()
-            1 -> TvShowFragment()
+            0 -> FavoriteMovieFragment()
+            1 -> FavoriteTvShowFragment()
             else -> Fragment()
         }
 

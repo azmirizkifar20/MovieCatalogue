@@ -16,6 +16,10 @@ class LocalDataSource(private val movieDao: MovieDao) {
 
     fun getDetailTvShows(id: String): LiveData<MovieEntity> = movieDao.getDetailTvShow(id)
 
+    fun getFavoriteMovies(): LiveData<List<MovieEntity>> = movieDao.getFavoriteMovies()
+
+    fun getFavoriteTvShows(): LiveData<List<MovieEntity>> = movieDao.getFavoriteTvShows()
+
     fun setFavorite(movie: MovieEntity, newState: Boolean) {
         movie.is_favorite = newState
         movieDao.setFavorite(movie)
