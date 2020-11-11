@@ -7,5 +7,11 @@ import org.marproject.moviescatalogue.data.source.MoviesRepository
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 
 class FavoriteTvShowViewModel(private val moviesRepository: MoviesRepository) : ViewModel()  {
+
     fun getFavoriteTvShows(): LiveData<PagedList<MovieEntity>> = moviesRepository.getFavoriteTvShows()
+
+    fun setFavorite(tvShow: MovieEntity) {
+        val newState = !tvShow.is_favorite
+        moviesRepository.setFavoriteMovie(tvShow, newState)
+    }
 }

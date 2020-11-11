@@ -10,6 +10,6 @@
     <string name="detail">Detail</string>
     <string name="share_movie">I invite you to watch this %1$s! you can see the trailer here : %2$s</string>
     <string name="favorite_movies">Favorite Movies</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_undo">Ingin membatalkan?</string>
+    <string name="message_ok">batalkan</string>
 </resources>

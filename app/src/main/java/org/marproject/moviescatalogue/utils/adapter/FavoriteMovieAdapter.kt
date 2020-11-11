@@ -28,6 +28,8 @@ class FavoriteMovieAdapter : PagedListAdapter<MovieEntity, FavoriteMovieAdapter.
         }
     }
 
+    fun getSwipedData(swipedPosition: Int): MovieEntity? = getItem(swipedPosition)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FavoriteMovieViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
     )
