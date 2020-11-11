@@ -35,7 +35,7 @@ class DetailActivity : AppCompatActivity() {
 
             if (movieId != null) {
                 viewModel.setSelectedMovie(movieId)
-                viewModel.getMovieDetail().observe(this, {
+                viewModel.movie.observe(this, {
                     when (it.status) {
                         Status.LOADING -> binding.loading.visibility = View.VISIBLE
                         Status.SUCCESS -> if (it.data != null) {
@@ -51,7 +51,7 @@ class DetailActivity : AppCompatActivity() {
             }
             if (tvShowId != null) {
                 viewModel.setSelectedTvShow(tvShowId)
-                viewModel.getTvShowDetail().observe(this, {
+                viewModel.tvShow.observe(this, {
                     when (it.status) {
                         Status.LOADING -> binding.loading.visibility = View.VISIBLE
                         Status.SUCCESS -> if (it.data != null) {
@@ -103,7 +103,7 @@ class DetailActivity : AppCompatActivity() {
         binding.fabBookmark.setOnClickListener {
             status = !status
             setStatusFavorite(status)
-            viewModel.setBookmark(movie, status)
+            viewModel.setBookmark()
         }
 
         binding.btnBack.setOnClickListener { finish() }
