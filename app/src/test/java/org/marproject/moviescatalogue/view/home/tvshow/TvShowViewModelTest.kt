@@ -12,6 +12,7 @@ import org.junit.runner.RunWith
 import org.marproject.moviescatalogue.utils.helper.DataDummy
 import org.marproject.moviescatalogue.data.source.MoviesRepository
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
+import org.marproject.moviescatalogue.utils.vo.Resource
 import org.marproject.moviescatalogue.view.home.tvshow.TvShowViewModel
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -29,7 +30,7 @@ class TvShowViewModelTest {
     private lateinit var moviesRepository: MoviesRepository
 
     @Mock
-    private lateinit var observer: Observer<List<MovieEntity>>
+    private lateinit var observer: Observer<Resource<List<MovieEntity>>>
 
     @Before
     fun setUp() {
@@ -38,12 +39,12 @@ class TvShowViewModelTest {
 
     @Test
     fun getTvShowData() {
-        val dummyTvShow = DataDummy.tvShowData()
-        val tvShows = MutableLiveData<List<MovieEntity>>()
+        val dummyTvShow = Resource.success(DataDummy.tvShowData())
+        val tvShows = MutableLiveData<Resource<List<MovieEntity>>>()
         tvShows.value = dummyTvShow
 
         Mockito.`when`(moviesRepository.getAllTvShows()).thenReturn(tvShows)
-        val tvShowEntities = viewModel.getTvShowData().value
+        val tvShowEntities = viewModel.getTvShowData().value?.data
         Mockito.verify(moviesRepository).getAllTvShows()
         assertNotNull(tvShowEntities)
         assertEquals(10, tvShowEntities?.size)
