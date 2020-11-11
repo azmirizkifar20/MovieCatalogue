@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.marproject.moviescatalogue.databinding.FragmentTvShowBinding
-import org.marproject.moviescatalogue.utils.adapter.TvShowAdapter
+import org.marproject.moviescatalogue.utils.adapter.MovieAdapter
 import org.marproject.moviescatalogue.utils.vo.Status
 
 class TvShowFragment : Fragment() {
@@ -34,14 +34,14 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // adapter
-        val tvShowAdapter = TvShowAdapter()
+        val tvShowAdapter = MovieAdapter()
 
         viewModel.getTvShowData().observe(this, {
             if (it != null) {
                 when (it.status) {
                     Status.LOADING -> binding.loading.visibility = View.GONE
                     Status.SUCCESS -> {
-                        tvShowAdapter.setTvShows(it.data)
+                        tvShowAdapter.submitList(it.data)
                         tvShowAdapter.notifyDataSetChanged()
                         binding.loading.visibility = View.GONE
                     }

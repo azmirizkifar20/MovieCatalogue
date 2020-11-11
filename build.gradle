@@ -20,6 +20,7 @@ buildscript {
     ext.lottie_version = "3.4.1"
     ext.koin_version = "2.1.6"
     ext.room_version = '2.2.5'
+    ext.paging_version = '2.1.2'
 
     repositories {
         google()

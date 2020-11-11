@@ -41,7 +41,7 @@ class MovieFragment : Fragment() {
                 when (it.status) {
                     Status.LOADING -> binding.loading.visibility = View.VISIBLE
                     Status.SUCCESS -> {
-                        movieAdapter.setMovies(it.data)
+                        movieAdapter.submitList(it.data)
                         movieAdapter.notifyDataSetChanged()
                         binding.loading.visibility = View.GONE
                     }

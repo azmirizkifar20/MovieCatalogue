@@ -13,7 +13,7 @@ import org.marproject.moviescatalogue.R
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 import org.marproject.moviescatalogue.view.detail.DetailActivity
 
-class MovieAdapter internal constructor() : PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
+class FavoriteMovieAdapter : PagedListAdapter<MovieEntity, FavoriteMovieAdapter.FavoriteMovieViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {
@@ -28,18 +28,18 @@ class MovieAdapter internal constructor() : PagedListAdapter<MovieEntity, MovieA
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FavoriteMovieViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
     )
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoriteMovieViewHolder, position: Int) {
         val movie = getItem(position)
         if (movie != null) {
             holder.bind(movie)
         }
     }
 
-    class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class FavoriteMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: MovieEntity) {
             with(itemView) {
                 tv_year.text = movie.year

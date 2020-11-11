@@ -1,6 +1,7 @@
 package org.marproject.moviescatalogue.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 
@@ -11,10 +12,10 @@ interface MovieDao {
     fun insertMovies(movies: List<MovieEntity>)
 
     @Query("SELECT * FROM movieEntities WHERE type = 'movie'")
-    fun getMovies(): LiveData<List<MovieEntity>>
+    fun getMovies(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM movieEntities WHERE type = 'tv-show'")
-    fun getTvShows(): LiveData<List<MovieEntity>>
+    fun getTvShows(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM movieEntities WHERE id = :id AND type = 'movie'")
     fun getDetailMovie(id: String): LiveData<MovieEntity>
@@ -23,10 +24,10 @@ interface MovieDao {
     fun getDetailTvShow(id: String): LiveData<MovieEntity>
 
     @Query("SELECT * FROM movieEntities WHERE type = 'movie' AND is_favorite = 1")
-    fun getFavoriteMovies(): LiveData<List<MovieEntity>>
+    fun getFavoriteMovies(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM movieEntities WHERE type = 'tv-show' AND is_favorite = 1")
-    fun getFavoriteTvShows(): LiveData<List<MovieEntity>>
+    fun getFavoriteTvShows(): DataSource.Factory<Int, MovieEntity>
 
     @Update
     fun setFavorite(movie: MovieEntity)

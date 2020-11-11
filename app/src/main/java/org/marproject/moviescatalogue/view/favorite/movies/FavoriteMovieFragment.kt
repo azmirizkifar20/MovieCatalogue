@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.marproject.moviescatalogue.databinding.FragmentFavoriteMovieBinding
-import org.marproject.moviescatalogue.utils.adapter.MovieAdapter
+import org.marproject.moviescatalogue.utils.adapter.FavoriteMovieAdapter
 
 class FavoriteMovieFragment : Fragment() {
 
@@ -31,10 +31,10 @@ class FavoriteMovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // adapter
-        val favoriteMovieAdapter = MovieAdapter()
+        val favoriteMovieAdapter = FavoriteMovieAdapter()
 
         viewModel.getFavoriteMovies().observe(this, {
-            favoriteMovieAdapter.setMovies(it)
+            favoriteMovieAdapter.submitList(it)
             favoriteMovieAdapter.notifyDataSetChanged()
             binding.loading.visibility = View.GONE
         })
