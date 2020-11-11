@@ -3,17 +3,16 @@ package org.marproject.moviescatalogue.view.home.tvshow
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.nhaarman.mockitokotlin2.verify
-import org.junit.Test
-import org.junit.Assert.*
+import androidx.paging.PagedList
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
-import org.marproject.moviescatalogue.utils.helper.DataDummy
 import org.marproject.moviescatalogue.data.source.MoviesRepository
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 import org.marproject.moviescatalogue.utils.vo.Resource
-import org.marproject.moviescatalogue.view.home.tvshow.TvShowViewModel
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
@@ -30,7 +29,10 @@ class TvShowViewModelTest {
     private lateinit var moviesRepository: MoviesRepository
 
     @Mock
-    private lateinit var observer: Observer<Resource<List<MovieEntity>>>
+    private lateinit var observer: Observer<Resource<PagedList<MovieEntity>>>
+
+    @Mock
+    private lateinit var pagedList: PagedList<MovieEntity>
 
     @Before
     fun setUp() {
@@ -39,17 +41,18 @@ class TvShowViewModelTest {
 
     @Test
     fun getTvShowData() {
-        val dummyTvShow = Resource.success(DataDummy.tvShowData())
-        val tvShows = MutableLiveData<Resource<List<MovieEntity>>>()
-        tvShows.value = dummyTvShow
+        val dummyTvShows = Resource.success(pagedList)
+        Mockito.`when`(dummyTvShows.data?.size).thenReturn(5)
+        val tvShows = MutableLiveData<Resource<PagedList<MovieEntity>>>()
+        tvShows.value = dummyTvShows
 
         Mockito.`when`(moviesRepository.getAllTvShows()).thenReturn(tvShows)
         val tvShowEntities = viewModel.getTvShowData().value?.data
         Mockito.verify(moviesRepository).getAllTvShows()
         assertNotNull(tvShowEntities)
-        assertEquals(10, tvShowEntities?.size)
+        assertEquals(5, tvShowEntities?.size)
 
         viewModel.getTvShowData().observeForever(observer)
-        verify(observer).onChanged(dummyTvShow)
+        Mockito.verify(observer).onChanged(dummyTvShows)
     }
 }
