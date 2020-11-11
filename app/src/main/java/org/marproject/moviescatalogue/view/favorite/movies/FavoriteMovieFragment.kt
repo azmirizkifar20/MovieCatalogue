@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_favorite_movie.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.marproject.moviescatalogue.R
 import org.marproject.moviescatalogue.databinding.FragmentFavoriteMovieBinding
@@ -45,6 +46,7 @@ class FavoriteMovieFragment : Fragment() {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             binding.loading.visibility = View.GONE
+            view_empty.visibility = if (it.isNotEmpty()) View.GONE else View.VISIBLE
         })
 
         with(binding.rvMovies) {

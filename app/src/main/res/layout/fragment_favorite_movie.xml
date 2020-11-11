@@ -22,4 +22,9 @@ tools:context=".view.favorite.movies.FavoriteMovieFragment">
     app:lottie_autoPlay="true"
     app:lottie_fileName="loading.json"
     app:lottie_loop="true" />
+
+    <include
+        android:id="@+id/view_empty"
+        layout="@layout/view_empty"
+        android:visibility="gone"/>
 </RelativeLayout>

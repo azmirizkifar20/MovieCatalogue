@@ -12,4 +12,5 @@
     <string name="favorite_movies">Favorite Movies</string>
     <string name="message_undo">Ingin membatalkan?</string>
     <string name="message_ok">batalkan</string>
+    <string name="no_data">Data is empty</string>
 </resources>
