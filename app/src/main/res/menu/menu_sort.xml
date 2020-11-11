@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_default"
+            android:checked="true"
+            android:title="Default" />
+        <item
+            android:id="@+id/action_lower"
+            android:checked="false"
+            android:title="Lowest rating" />
+        <item
+            android:id="@+id/action_higher"
+            android:checked="false"
+            android:title="Highest rating" />
+    </group>
+</menu>

@@ -9,4 +9,8 @@
     <string name="share">Share</string>
     <string name="detail">Detail</string>
     <string name="share_movie">I invite you to watch this %1$s! you can see the trailer here : %2$s</string>
+    <string name="favorite_movies">Favorite Movies</string>
+    <string name="message_undo">Ingin membatalkan?</string>
+    <string name="message_ok">batalkan</string>
+    <string name="no_data">Data is empty</string>
 </resources>

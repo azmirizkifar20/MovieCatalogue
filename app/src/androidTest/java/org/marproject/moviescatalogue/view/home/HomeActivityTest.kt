@@ -2,16 +2,19 @@ package org.marproject.moviescatalogue.view.home
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.junit.Rule
 import org.marproject.moviescatalogue.R
-import org.marproject.moviescatalogue.data.DataDummy
+import org.marproject.moviescatalogue.utils.helper.DataDummy
+import org.marproject.moviescatalogue.utils.helper.EspressoIdlingResource
 
 class HomeActivityTest {
 
@@ -20,6 +23,16 @@ class HomeActivityTest {
 
     @get:Rule
     var activityRule = ActivityTestRule(HomeActivity::class.java)
+
+    @Before
+    fun setUp() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idlingResource)
+    }
 
     @Test
     fun loadMovies() {
@@ -33,8 +46,7 @@ class HomeActivityTest {
     fun loadDetailMovie() {
         onView(withId(R.id.rv_movies)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                0,
-                ViewActions.click()
+                0, click()
             )
         )
         onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
@@ -63,8 +75,7 @@ class HomeActivityTest {
         onView(withText("TV SHOW")).perform(click())
         onView(withId(R.id.rv_tv_show)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                0,
-                ViewActions.click()
+                0, click()
             )
         )
         onView(withId(R.id.tv_title)).check(matches(isDisplayed()))

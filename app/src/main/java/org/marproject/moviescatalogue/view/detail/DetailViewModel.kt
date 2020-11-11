@@ -1,37 +1,55 @@
 package org.marproject.moviescatalogue.view.detail
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import org.marproject.moviescatalogue.data.DataDummy
-import org.marproject.moviescatalogue.model.Movies
+import org.marproject.moviescatalogue.data.source.MoviesRepository
+import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
+import org.marproject.moviescatalogue.utils.vo.Resource
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
-    private lateinit var movieId: String
-    private lateinit var tvShowId: String
+    private var movieId = MutableLiveData<String>()
+    private var tvShowId = MutableLiveData<String>()
 
     fun setSelectedMovie(id: String) {
-        this.movieId = id
+        this.movieId.value = id
     }
 
     fun setSelectedTvShow(id: String) {
-        this.tvShowId = id
+        this.tvShowId.value = id
     }
 
-    fun getMovieDetail(): Movies? {
-        var movie: Movies? = null
-        for (movieEntity in DataDummy.moviesData()) {
-            if (movieEntity.id == movieId) movie = movieEntity
+    var movie: LiveData<Resource<MovieEntity>> = Transformations.switchMap(movieId) { movieId ->
+        moviesRepository.getDetailMovie(movieId)
+    }
+
+    var tvShow: LiveData<Resource<MovieEntity>> = Transformations.switchMap(tvShowId) { tvShowId ->
+        moviesRepository.getDetailTvShow(tvShowId)
+    }
+
+    fun setBookmark() {
+        val resourceMovie = movie.value
+        val resourceTvShow = tvShow.value
+
+        if (resourceMovie != null) {
+            val movieData = resourceMovie.data
+
+            if (movieData != null) {
+                val newState = !movieData.is_favorite
+                moviesRepository.setFavoriteMovie(movieData, newState)
+            }
         }
 
-        return movie
-    }
+        if (resourceTvShow != null) {
+            val tvShowData = resourceTvShow.data
 
-    fun getTvShowDetail(): Movies? {
-        var tvShow: Movies? = null
-        for (tvShowEntity in DataDummy.tvShowData()) {
-            if (tvShowEntity.id == tvShowId) tvShow = tvShowEntity
+            if (tvShowData != null) {
+                val newState = !tvShowData.is_favorite
+                moviesRepository.setFavoriteMovie(tvShowData, newState)
+            }
         }
-
-        return tvShow
     }
+
 }
