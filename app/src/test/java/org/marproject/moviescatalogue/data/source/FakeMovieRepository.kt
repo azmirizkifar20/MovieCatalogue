@@ -9,6 +9,7 @@ import org.marproject.moviescatalogue.data.source.remote.RemoteDataSource
 import org.marproject.moviescatalogue.data.source.remote.network.ApiResponse
 import org.marproject.moviescatalogue.data.source.remote.response.MovieResponse
 import org.marproject.moviescatalogue.utils.helper.AppExecutors
+import org.marproject.moviescatalogue.utils.helper.SortUtils
 import org.marproject.moviescatalogue.utils.vo.Resource
 
 class FakeMovieRepository(
@@ -186,6 +187,28 @@ class FakeMovieRepository(
             .build()
 
         return LivePagedListBuilder(localDataSource.getFavoriteTvShows(), config).build()
+    }
+
+    override fun getSortedMovies(sort: String): LiveData<PagedList<MovieEntity>> {
+        val query = SortUtils.getSortQueryMovies(sort)
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+
+        return LivePagedListBuilder(localDataSource.getSortedMovies(query), config).build()
+    }
+
+    override fun getSortedTvShows(sort: String): LiveData<PagedList<MovieEntity>> {
+        val query = SortUtils.getSortQueryTvShows(sort)
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+
+        return LivePagedListBuilder(localDataSource.getSortedTvShows(query), config).build()
     }
 
     override fun setFavoriteMovie(movie: MovieEntity, state: Boolean) =
