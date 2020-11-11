@@ -3,15 +3,13 @@ package org.marproject.moviescatalogue.view.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
-import org.marproject.moviescatalogue.utils.helper.DataDummy
 import org.marproject.moviescatalogue.data.source.MoviesRepository
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
+import org.marproject.moviescatalogue.utils.helper.DataDummy
 import org.marproject.moviescatalogue.utils.vo.Resource
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
