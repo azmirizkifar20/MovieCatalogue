@@ -3,7 +3,6 @@ package org.marproject.moviescatalogue.data.source
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import androidx.sqlite.db.SupportSQLiteQuery
 import org.marproject.moviescatalogue.data.source.local.LocalDataSource
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 import org.marproject.moviescatalogue.data.source.remote.RemoteDataSource
@@ -198,7 +197,7 @@ class MoviesRepository(
     }
 
     override fun getSortedTvShows(sort: String): LiveData<PagedList<MovieEntity>> {
-        val query = SortUtils.getSortQueryMovies(sort)
+        val query = SortUtils.getSortQueryTvShows(sort)
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setInitialLoadSizeHint(4)
