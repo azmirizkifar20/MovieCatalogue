@@ -3,6 +3,7 @@ package org.marproject.moviescatalogue.data.source.local.room
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import org.marproject.moviescatalogue.data.source.local.entity.MovieEntity
 
 @Dao
@@ -31,4 +32,10 @@ interface MovieDao {
 
     @Update
     fun setFavorite(movie: MovieEntity)
+
+    @RawQuery(observedEntities = [MovieEntity::class])
+    fun getSortedMovies(query: SupportSQLiteQuery): DataSource.Factory<Int, MovieEntity>
+
+    @RawQuery(observedEntities = [MovieEntity::class])
+    fun getSortedTvShows(query: SupportSQLiteQuery): DataSource.Factory<Int, MovieEntity>
 }
